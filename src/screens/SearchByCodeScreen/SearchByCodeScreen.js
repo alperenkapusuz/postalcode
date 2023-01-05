@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import CustomButton from "../../components/CustomButton";
 import styles from "./SearchByCodeScreen.style";
 import RenderFlatlist from "./RenderFlatlist";
+import { onlyCharacter } from "../../utils/onlyNumber";
 
 const SearchByCodeScreen = () => {
   const navigation = useNavigation();
@@ -44,7 +45,9 @@ const SearchByCodeScreen = () => {
     <View style={styles.container}>
       <TextInput
         value={zipcode}
-        onChangeText={setZipcode}
+        onChangeText={(value) => setZipcode(onlyCharacter(value))}
+        keyboardType="numeric"
+        maxLength={5}
         style={styles.input}
       />
       <CustomButton title="Ara" onPress={() => dataHandler(zipcode)} />

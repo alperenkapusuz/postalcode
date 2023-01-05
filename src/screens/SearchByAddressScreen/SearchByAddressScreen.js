@@ -1,4 +1,4 @@
-import { View, Text, Button } from "react-native";
+import { View, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { iller } from "../../assets/data/provinces";
@@ -41,13 +41,13 @@ const SearchByAddressScreen = () => {
         <CustomSelectDropDown
           data={iller}
           defaultButtonText={"İl Seçiniz"}
-          onSelect={(selectedItem, index) => {
+          onSelect={(selectedItem) => {
             dataHandler(selectedItem[0]);
           }}
-          buttonTextAfterSelection={(selectedItem, index) => {
+          buttonTextAfterSelection={(selectedItem) => {
             return selectedItem;
           }}
-          rowTextForSelection={(item, index) => {
+          rowTextForSelection={(item) => {
             return item;
           }}
         />
@@ -57,13 +57,13 @@ const SearchByAddressScreen = () => {
               new Set(selectedCity.postakodu.map((x) => x.ilce))
             )}
             defaultButtonText={"İlçe Seçiniz"}
-            onSelect={(selectedItem, index) => {
+            onSelect={(selectedItem) => {
               setSelectedDistrict(selectedItem);
             }}
-            buttonTextAfterSelection={(selectedItem, index) => {
+            buttonTextAfterSelection={(selectedItem) => {
               return selectedItem;
             }}
-            rowTextForSelection={(item, index) => {
+            rowTextForSelection={(item) => {
               return item;
             }}
           />
