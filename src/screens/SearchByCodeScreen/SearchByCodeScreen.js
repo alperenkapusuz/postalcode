@@ -11,16 +11,14 @@ const SearchByCodeScreen = () => {
   const navigation = useNavigation();
   const [zipcode, setZipcode] = useState("");
   const [data, setData] = useState([]);
-  const [list, setList] = useState([]);
 
   const dataHandler = async (zipcode) => {
     const plaka = zipcode.slice(0, 2);
     await axios
       .get(`https://api.ubilisim.com/postakodu/il/${plaka}`)
-      .then((response) => setData(response.data.postakodu))
-      .then(
-        setList(
-          data.filter(function (value) {
+      .then((response) =>
+        setData(
+          response.data.postakodu.filter(function (value) {
             return value.pk == zipcode;
           })
         )
@@ -39,7 +37,7 @@ const SearchByCodeScreen = () => {
     );
   };
 
-  console.log(list);
+  console.log(data);
 
   return (
     <View style={styles.container}>
@@ -51,7 +49,7 @@ const SearchByCodeScreen = () => {
         style={styles.input}
       />
       <CustomButton title="Ara" onPress={() => dataHandler(zipcode)} />
-      <FlatList data={list} renderItem={renderItem} style={styles.flatlist} />
+      <FlatList data={data} renderItem={renderItem} style={styles.flatdata} />
       <CustomButton title="GERİ" onPress={() => navigation.goBack()} />
     </View>
   );
