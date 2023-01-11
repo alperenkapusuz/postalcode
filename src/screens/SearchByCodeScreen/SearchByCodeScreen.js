@@ -10,7 +10,48 @@ import { onlyCharacter } from "../../utils/onlyNumber";
 const SearchByCodeScreen = () => {
   const navigation = useNavigation();
   const [zipcode, setZipcode] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    {
+      il: "",
+      ilce: "",
+      mahalle: "",
+      pk: "",
+      plaka: "",
+      semt_bucak_belde: "",
+    },
+    {
+      il: "",
+      ilce: "",
+      mahalle: "",
+      pk: "",
+      plaka: "",
+      semt_bucak_belde: "",
+    },
+    {
+      il: "",
+      ilce: "",
+      mahalle: "",
+      pk: "",
+      plaka: "",
+      semt_bucak_belde: "",
+    },
+    {
+      il: "",
+      ilce: "",
+      mahalle: "",
+      pk: "",
+      plaka: "",
+      semt_bucak_belde: "",
+    },
+    {
+      il: "",
+      ilce: "",
+      mahalle: "",
+      pk: "",
+      plaka: "",
+      semt_bucak_belde: "",
+    },
+  ]);
 
   const dataHandler = async (zipcode) => {
     const plaka = zipcode.slice(0, 2);
@@ -25,7 +66,7 @@ const SearchByCodeScreen = () => {
       )
       .catch((err) => console.error(err));
   };
-
+  console.log(data);
   const renderItem = ({ item }) => {
     return (
       <RenderFlatlist
@@ -37,7 +78,10 @@ const SearchByCodeScreen = () => {
     );
   };
 
-  console.log(data);
+  const createAlert = () =>
+    Alert.alert("Yanlış Girdi", "Lütfen 5 haneli bir posta kodu giriniz", [
+      { text: "OK", onPress: () => setZipcode("") },
+    ]);
 
   return (
     <View style={styles.container}>
@@ -47,8 +91,14 @@ const SearchByCodeScreen = () => {
         keyboardType="numeric"
         maxLength={5}
         style={styles.input}
+        placeholder="Posta kodu giriniz"
       />
-      <CustomButton title="Ara" onPress={() => dataHandler(zipcode)} />
+      {zipcode.length !== 5 ? (
+        <CustomButton title="Ara" onPress={() => createAlert()} />
+      ) : (
+        <CustomButton title="Ara" onPress={() => dataHandler(zipcode)} />
+      )}
+
       <FlatList data={data} renderItem={renderItem} style={styles.flatdata} />
       <CustomButton title="GERİ" onPress={() => navigation.goBack()} />
     </View>

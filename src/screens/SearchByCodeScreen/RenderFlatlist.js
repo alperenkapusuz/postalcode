@@ -10,6 +10,7 @@ const RenderFlatlist = ({ il, ilce, mahalle, pk }) => {
         marginVertical: 5,
         padding: 5,
         backgroundColor: "white",
+        width: 300,
       }}
     >
       <Text
